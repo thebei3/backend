@@ -5,7 +5,7 @@ from bs4 import BeautifulSoup
 app = Flask(__name__)
 
 
-@app.route('/parse-news', methods=['POST'])
+@app.route('/parse-news', methods=['GET'])
 def parse_news():
     html_code = request.get_data(as_text=True)
     soup = BeautifulSoup(html_code, 'html.parser')
