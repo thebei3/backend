@@ -25,4 +25,5 @@ def parse_news():
 
     return jsonify(news_data)
 
-app.run()
+if __name__ == '__main__':
+    app.run()
