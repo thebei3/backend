@@ -24,3 +24,5 @@ def parse_news():
         news_data.append(news_item)
 
     return jsonify(news_data)
+
+app.run()
