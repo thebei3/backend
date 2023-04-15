@@ -1,7 +1,7 @@
 from flask import Flask, request, jsonify
 from bs4 import BeautifulSoup
 import json
-
+import re
 
 app = Flask(__name__)
 
@@ -9,6 +9,7 @@ app = Flask(__name__)
 @app.route('/parse-news', methods=['POST'])
 def parse_news():
     html_code = request.get_data(as_text=True)
+    html_code = re.sub(r'\\', '', html_code)  # \ karakterlerini sil
     soup = BeautifulSoup(html_code, 'html.parser')
 
     titles = soup.find_all('a', class_='title')
@@ -27,8 +28,9 @@ def parse_news():
     # `news_data` verisini JSON formatına dönüştürüyoruz
     json_data = json.dumps(news_data)
 
+
     # JSON verisini geri döndürüyoruz
-    return jsonify(json_data)
+    return json_data
 
 
 
