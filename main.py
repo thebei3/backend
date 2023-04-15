@@ -1,5 +1,6 @@
 from flask import Flask, request, jsonify
 from bs4 import BeautifulSoup
+import json
 
 
 app = Flask(__name__)
@@ -23,7 +24,8 @@ def parse_news():
         }
         news_data.append(news_item)
 
-    return jsonify(news_data)
+    # `news_data` verisini JSON formatına dönüştürüyoruz
+    json_data = json.dumps(news_data)
 
-if __name__ == '__main__':
-    app.run()
+    # JSON verisini geri döndürüyoruz
+    return jsonify(json_data)
