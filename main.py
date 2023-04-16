@@ -7,7 +7,7 @@ app = Flask(__name__)
 
 
 @app.route('/getnewurl', methods=['GET'])
-def hello():
+def getnewurl():
     return 'https://www.investing.com/news/cryptocurrency-news'
 
 @app.route('/parse-news', methods=['POST'])
@@ -27,12 +27,18 @@ def parse_news():
             time_ago = date.text
         else:
             time_ago = None
+        
+        resulltLink = ''
 
+        if not detail_url['href'].startswith('http'):
+            urlPrefix = getnewurl()
+            resulltLink = urlPrefix + detail_url['href']
+            
         news_item = {
             'title': title.text,
             'timeAgo': time_ago,
             'photoUrl': photo_url['data-src'],
-            'linkUrl': detail_url['href']
+            'linkUrl': resulltLink
         }
 
         news_data.append(news_item)
