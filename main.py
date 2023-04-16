@@ -31,7 +31,7 @@ def parse_news():
         resulltLink = ''
 
         if not detail_url['href'].startswith('http'):
-            urlPrefix = getnewurl()
+            urlPrefix = 'https://www.investing.com'
             resulltLink = urlPrefix + detail_url['href']
             
         news_item = {
