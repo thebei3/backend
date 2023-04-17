@@ -11,30 +11,37 @@ app = Flask(__name__)
 def getnewurl_usa():
     return 'https://www.investing.com/news/cryptocurrency-news'
 
+
 @app.route('/getnewurl_tr', methods=['GET'])
 def getnewurl_tr():
     return 'https://tr.investing.com/news/cryptocurrency-news'
+
 
 @app.route('/getnewurl_it', methods=['GET'])
 def getnewurl_it():
     return 'https://it.investing.com/news/cryptocurrency-news'
 
+
 @app.route('/getnewurl_es', methods=['GET'])
 def getnewurl_es():
     return 'https://es.investing.com/news/cryptocurrency-news'
+
 
 @app.route('/getnewurl_cn', methods=['GET'])
 def getnewurl_cn():
     return 'https://cn.investing.com/news/cryptocurrency-news'
 
+
 @app.route('/getnewurl_fr', methods=['GET'])
 def getnewurl_fr():
     return 'https://fr.investing.com/news/cryptocurrency-news'
 
+
 @app.route('/parse-news', methods=['POST'])
 def parse_news():
-    baseUrl = request.get_data(as_text=True)
-    html_code = request.get_data(as_text=True)
+    data = json.loads(request.get_data(as_text=True))
+    baseUrl = re.sub(r'/news/cryptocurrency-news', '', data['baseUrl'])
+    html_code = data['html_code']
     html_code = re.sub(r'\\', '', html_code)  # \ karakterlerini sil
     soup = BeautifulSoup(html_code, 'html5lib')
 
@@ -66,9 +73,6 @@ def parse_news():
 
     # JSON verisini geri döndürüyoruz
     return json_data
-
-
-
 
 
 if __name__ == '__main__':
