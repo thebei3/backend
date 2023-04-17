@@ -33,6 +33,7 @@ def getnewurl_fr():
 
 @app.route('/parse-news', methods=['POST'])
 def parse_news():
+    baseUrl = request.get_data(as_text=True)
     html_code = request.get_data(as_text=True)
     html_code = re.sub(r'\\', '', html_code)  # \ karakterlerini sil
     soup = BeautifulSoup(html_code, 'html5lib')
@@ -45,10 +46,10 @@ def parse_news():
     news_data = []
     for title, date, photo_url, detail_url in zip(titles, dates, photo_urls, detail_urls):
 
-        resulltLink = ''
+        resulltLink = detail_url['href']
 
         if not detail_url['href'].startswith('http'):
-            urlPrefix = 'https://www.investing.com'
+            urlPrefix = baseUrl
             resulltLink = urlPrefix + detail_url['href']
 
         news_item = {
