@@ -105,8 +105,7 @@ def getnewurl_fr():
 def parse_news():
     data = json.loads(request.get_data(as_text=True))
 
-    baseUrl = re.sub(r'/news/(cryptocurrency|stock-market|commodities|economic-indicators|economy)-news', '', data['baseUrl'])
-
+    baseUrl = data['baseUrl'].replace('/news/cryptocurrency-news', '').replace('/news/stock-market-news', '').replace('/news/commodities-news', '').replace('/news/economic-indicators', '').replace('/news/economy', '')
 
     html_code = data['html_code']
     html_code = re.sub(r'\\', '', html_code)  # \ karakterlerini sil
