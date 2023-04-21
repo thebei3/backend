@@ -104,11 +104,9 @@ def getnewurl_fr():
 @app.route('/parse-news', methods=['POST'])
 def parse_news():
     data = json.loads(request.get_data(as_text=True))
-    baseUrl = re.sub(r'/news/cryptocurrency-news', '', data['baseUrl'])
-    baseUrl = re.sub(r'/news/stock-market-news', '', data['baseUrl'])
-    baseUrl = re.sub(r'/news/commodities-news', '', data['baseUrl'])
-    baseUrl = re.sub(r'/news/economic-indicators', '', data['baseUrl'])
-    baseUrl = re.sub(r'/news/economy', '', data['baseUrl'])
+
+    baseUrl = re.sub(r'/news/(cryptocurrency|stock-market|commodities|economic-indicators|economy)-news', '', data['baseUrl'])
+
 
     html_code = data['html_code']
     html_code = re.sub(r'\\', '', html_code)  # \ karakterlerini sil
