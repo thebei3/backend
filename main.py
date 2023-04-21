@@ -105,6 +105,11 @@ def getnewurl_fr():
 def parse_news():
     data = json.loads(request.get_data(as_text=True))
     baseUrl = re.sub(r'/news/cryptocurrency-news', '', data['baseUrl'])
+    baseUrl = re.sub(r'/news/stock-market-news', '', data['baseUrl'])
+    baseUrl = re.sub(r'/news/commodities-news', '', data['baseUrl'])
+    baseUrl = re.sub(r'/news/economic-indicators', '', data['baseUrl'])
+    baseUrl = re.sub(r'/news/economy', '', data['baseUrl'])
+
     html_code = data['html_code']
     html_code = re.sub(r'\\', '', html_code)  # \ karakterlerini sil
     html_code = re.sub(r'js-external-link title', 'title', html_code)
