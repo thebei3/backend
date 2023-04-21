@@ -43,6 +43,9 @@ def parse_news():
     baseUrl = re.sub(r'/news/cryptocurrency-news', '', data['baseUrl'])
     html_code = data['html_code']
     html_code = re.sub(r'\\', '', html_code)  # \ karakterlerini sil
+    html_code = re.sub(r'js-external-link title', 'title', html_code)
+    html_code = re.sub(r'js-external-link img', 'img', html_code)
+
     soup = BeautifulSoup(html_code, 'html5lib')
 
     titles = soup.select('.largeTitle a.title')
