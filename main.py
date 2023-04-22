@@ -99,6 +99,22 @@ def getnewurl_fr():
         return 'https://fr.investing.com/news/commodities-news'
     else:
         return 'https://fr.investing.com/news/cryptocurrency-news'
+        
+@app.route('/getnewurl_ru', methods=['GET'])
+def getnewurl_ru():
+
+    newType = request.args.get('newType')
+
+    if newType == 'stockMarket':
+        return 'https://ru.investing.com/news/stock-market-news'
+    elif newType == 'economy':
+        return 'https://ru.investing.com/news/economy'
+    elif newType == 'ecoInd':
+        return 'https://ru.investing.com/news/economic-indicators'
+    elif newType == 'commodities':
+        return 'https://ru.investing.com/news/commodities-news'
+    else:
+        return 'https://ru.investing.com/news/cryptocurrency-news'
 
 
 @app.route('/parse-news', methods=['POST'])
