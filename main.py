@@ -116,6 +116,21 @@ def getnewurl_ru():
     else:
         return 'https://ru.investing.com/news/cryptocurrency-news'
 
+@app.route('/getnewurl_vi', methods=['GET'])
+def getnewurl_ru():
+
+    newType = request.args.get('newType')
+
+    if newType == 'stockMarket':
+        return 'https://vn.investing.com/news/stock-market-news'
+    elif newType == 'economy':
+        return 'https://vn.investing.com/news/economy'
+    elif newType == 'ecoInd':
+        return 'https://vn.investing.com/news/economic-indicators'
+    elif newType == 'commodities':
+        return 'https://vn.investing.com/news/commodities-news'
+    else:
+        return 'https://vn.investing.com/news/cryptocurrency-news'
 
 @app.route('/parse-news', methods=['POST'])
 def parse_news():
