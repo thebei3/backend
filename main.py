@@ -117,7 +117,7 @@ def getnewurl_ru():
         return 'https://ru.investing.com/news/cryptocurrency-news'
 
 @app.route('/getnewurl_vi', methods=['GET'])
-def getnewurl_ru():
+def getnewurl_vi():
 
     newType = request.args.get('newType')
 
