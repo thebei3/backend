@@ -150,6 +150,41 @@ def getnewurl_de():
         return 'https://de.investing.com/news/cryptocurrency-news'
         
         
+@app.route('/getnewurl_hi', methods=['GET'])
+def getnewurl_hi():
+
+    newType = request.args.get('newType')
+
+    if newType == 'stockMarket':
+        return 'https://hi.investing.com/news/stock-market-news'
+    elif newType == 'economy':
+        return 'https://hi.investing.com/news/economy'
+    elif newType == 'ecoInd':
+        return 'https://hi.investing.com/news/economic-indicators'
+    elif newType == 'commodities':
+        return 'https://hi.investing.com/news/commodities-news'
+    else:
+        return 'https://hi.investing.com/news/cryptocurrency-news'
+        
+        
+
+@app.route('/getnewurl_pl', methods=['GET'])
+def getnewurl_pl():
+
+    newType = request.args.get('newType')
+
+    if newType == 'stockMarket':
+        return 'https://pl.investing.com/news/stock-market-news'
+    elif newType == 'economy':
+        return 'https://pl.investing.com/news/economy'
+    elif newType == 'ecoInd':
+        return 'https://pl.investing.com/news/economic-indicators'
+    elif newType == 'commodities':
+        return 'https://pl.investing.com/news/commodities-news'
+    else:
+        return 'https://pl.investing.com/news/cryptocurrency-news'
+        
+        
 
 @app.route('/parse-news', methods=['POST'])
 def parse_news():
