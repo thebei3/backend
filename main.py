@@ -54,6 +54,7 @@ def getnewurl_it():
     else:
         return 'https://it.investing.com/news/cryptocurrency-news'
 
+
 @app.route('/getnewurl_es', methods=['GET'])
 def getnewurl_es():
     newType = request.args.get('newType')
@@ -68,6 +69,7 @@ def getnewurl_es():
         return 'https://es.investing.com/news/commodities-news'
     else:
         return 'https://es.investing.com/news/cryptocurrency-news'
+
 
 @app.route('/getnewurl_cn', methods=['GET'])
 def getnewurl_cn():
@@ -86,7 +88,6 @@ def getnewurl_cn():
 
 @app.route('/getnewurl_fr', methods=['GET'])
 def getnewurl_fr():
-
     newType = request.args.get('newType')
 
     if newType == 'stockMarket':
@@ -99,10 +100,10 @@ def getnewurl_fr():
         return 'https://fr.investing.com/news/commodities-news'
     else:
         return 'https://fr.investing.com/news/cryptocurrency-news'
-        
+
+
 @app.route('/getnewurl_ru', methods=['GET'])
 def getnewurl_ru():
-
     newType = request.args.get('newType')
 
     if newType == 'stockMarket':
@@ -116,9 +117,9 @@ def getnewurl_ru():
     else:
         return 'https://ru.investing.com/news/cryptocurrency-news'
 
+
 @app.route('/getnewurl_vi', methods=['GET'])
 def getnewurl_vi():
-
     newType = request.args.get('newType')
 
     if newType == 'stockMarket':
@@ -131,11 +132,10 @@ def getnewurl_vi():
         return 'https://vn.investing.com/news/commodities-news'
     else:
         return 'https://vn.investing.com/news/cryptocurrency-news'
-        
-        
+
+
 @app.route('/getnewurl_de', methods=['GET'])
 def getnewurl_de():
-
     newType = request.args.get('newType')
 
     if newType == 'stockMarket':
@@ -148,11 +148,10 @@ def getnewurl_de():
         return 'https://de.investing.com/news/commodities-news'
     else:
         return 'https://de.investing.com/news/cryptocurrency-news'
-        
-        
+
+
 @app.route('/getnewurl_hi', methods=['GET'])
 def getnewurl_hi():
-
     newType = request.args.get('newType')
 
     if newType == 'stockMarket':
@@ -165,12 +164,10 @@ def getnewurl_hi():
         return 'https://hi.investing.com/news/commodities-news'
     else:
         return 'https://hi.investing.com/news/cryptocurrency-news'
-        
-        
+
 
 @app.route('/getnewurl_pl', methods=['GET'])
 def getnewurl_pl():
-
     newType = request.args.get('newType')
 
     if newType == 'stockMarket':
@@ -183,8 +180,7 @@ def getnewurl_pl():
         return 'https://pl.investing.com/news/commodities-news'
     else:
         return 'https://pl.investing.com/news/cryptocurrency-news'
-        
-        
+
 
 @app.route('/parse-news', methods=['POST'])
 def parse_news():
@@ -222,8 +218,16 @@ def parse_news():
 
         news_data.append(news_item)
 
+    filtered_items = []
+    for item in news_data:
+        if 'linkUrl' in item:
+            if 'pro' not in item['linkUrl'] or 'offers' not in item['linkUrl']:
+                filtered_items.append(item)
+        else:
+            filtered_items.append(item)
+
     # `news_data` verisini JSON formatına dönüştürüyoruz
-    json_data = json.dumps(news_data)
+    json_data = json.dumps(filtered_items)
 
     # JSON verisini geri döndürüyoruz
     return json_data
